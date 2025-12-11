@@ -21,10 +21,12 @@ const getCategoryColor = (category: TaskCategory) => {
         case TaskCategory.DEVELOPMENT: return 'bg-blue-100 text-blue-700 border-blue-200 dark:bg-blue-900/30 dark:text-blue-300 dark:border-blue-800';
         case TaskCategory.DESIGN: return 'bg-pink-100 text-pink-700 border-pink-200 dark:bg-pink-900/30 dark:text-pink-300 dark:border-pink-800';
         case TaskCategory.MARKETING: return 'bg-orange-100 text-orange-700 border-orange-200 dark:bg-orange-900/30 dark:text-orange-300 dark:border-orange-800';
-        case TaskCategory.RESEARCH: return 'bg-purple-100 text-purple-700 border-purple-200 dark:bg-purple-900/30 dark:text-purple-300 dark:border-purple-800';
-        case TaskCategory.PLANNING: return 'bg-cyan-100 text-cyan-700 border-cyan-200 dark:bg-cyan-900/30 dark:text-cyan-300 dark:border-cyan-800';
+        case TaskCategory.CONTENT: return 'bg-purple-100 text-purple-700 border-purple-200 dark:bg-purple-900/30 dark:text-purple-300 dark:border-purple-800';
+        case TaskCategory.FINANCE: return 'bg-emerald-100 text-emerald-700 border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-300 dark:border-emerald-800';
+        case TaskCategory.ADMIN: return 'bg-slate-100 text-slate-700 border-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:border-slate-700';
+        case TaskCategory.HR: return 'bg-rose-100 text-rose-700 border-rose-200 dark:bg-rose-900/30 dark:text-rose-300 dark:border-rose-800';
         case TaskCategory.OTHER:
-        default: return 'bg-slate-100 text-slate-700 border-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:border-slate-700';
+        default: return 'bg-gray-100 text-gray-700 border-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700';
     }
 };
 
@@ -290,7 +292,7 @@ const TaskBoard: React.FC<TaskBoardProps> = ({ project, tasks, onAddTask, onUpda
                 description: s.description || '',
                 status: TaskStatus.TODO,
                 priority: s.priority as Priority,
-                category: TaskCategory.PLANNING,
+                category: TaskCategory.DEVELOPMENT, // Default for AI Generated Tasks
                 attachments: [],
                 checklist: [],
                 comments: [],
@@ -1380,35 +1382,20 @@ const TaskBoard: React.FC<TaskBoardProps> = ({ project, tasks, onAddTask, onUpda
                                                 disabled={!canEditTask(editingTask)}
                                                 className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg p-2 text-sm text-slate-700 dark:text-slate-300 outline-none focus:ring-2 focus:ring-indigo-500"
                                             >
-                                                {Object.values(TaskCategory).map(c => (
-                                                    <option key={c} value={c}>{c}</option>
+                                                {Object.values(TaskCategory).map(cat => (
+                                                    <option key={cat} value={cat}>{cat}</option>
                                                 ))}
                                             </select>
                                         </div>
-
-                                        <div>
-                                            <span className="block text-xs text-slate-400 mb-1">Due Date</span>
-                                            <input 
-                                                type="date"
-                                                value={editingTask.dueDate}
-                                                onChange={(e) => canEditTask(editingTask) && setEditingTask({...editingTask, dueDate: e.target.value})}
-                                                disabled={!canEditTask(editingTask)}
-                                                className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg p-2 text-sm text-slate-700 dark:text-slate-300 outline-none focus:ring-2 focus:ring-indigo-500"
-                                            />
-                                        </div>
                                     </div>
-                                </div>
-                                <div className="text-xs text-slate-400">
-                                    <p>Created by Admin</p>
-                                    <p>ID: {editingTask.id}</p>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="p-4 border-t border-slate-100 dark:border-slate-700 flex justify-end">
+                        <div className="p-6 border-t border-slate-100 dark:border-slate-700 flex justify-end">
                             <button 
-                                onClick={handleSaveEdit}
-                                className="px-6 py-2 bg-indigo-600 text-white rounded-lg font-bold hover:bg-indigo-700 transition-colors shadow-lg shadow-indigo-200 dark:shadow-none"
+                                onClick={() => handleSaveEdit()}
+                                className="px-6 py-2 bg-indigo-600 text-white rounded-lg font-bold hover:bg-indigo-700 shadow-md transition-colors"
                             >
                                 Save Changes
                             </button>

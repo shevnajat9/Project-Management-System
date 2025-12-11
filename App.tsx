@@ -138,7 +138,7 @@ const INITIAL_TASKS: Task[] = [
     description: 'Analyze top 3 competitors and document their dashboard flows.',
     status: TaskStatus.DONE,
     priority: Priority.HIGH,
-    category: TaskCategory.RESEARCH,
+    category: TaskCategory.MARKETING,
     assignees: [MOCK_USERS_DATA[1]],
     attachments: [],
     checklist: [

@@ -16,8 +16,10 @@ export enum TaskCategory {
   DEVELOPMENT = 'Development',
   DESIGN = 'Design',
   MARKETING = 'Marketing',
-  RESEARCH = 'Research',
-  PLANNING = 'Planning',
+  CONTENT = 'Content',
+  FINANCE = 'Finance',
+  ADMIN = 'Admin',
+  HR = 'HR',
   OTHER = 'Other'
 }
 
